@@ -220,6 +220,7 @@ Route::group(['prefix' => 'data', 'namespace' => 'Data', 'middleware' => 'power:
     Route::post('prompt-categories/sort', 'PromptController@postSortPromptCategory');
 
     Route::get('prompts', 'PromptController@getPromptIndex');
+    Route::get('prompts/old', 'PromptController@getPromptIndexOld');
     Route::get('prompts/create', 'PromptController@getCreatePrompt');
     Route::get('prompts/edit/{id}', 'PromptController@getEditPrompt');
     Route::get('prompts/delete/{id}', 'PromptController@getDeletePrompt');

@@ -225,3 +225,15 @@ Route::group(['prefix' => 'comments', 'namespace' => 'Comments'], function () {
     Route::post('/{id}/like/{action}', 'CommentController@like')->name('comments.like');
     Route::get('/liked', 'CommentController@getLikedComments');
 });
+
+/**************************************************************************************************
+    User Mail - mod mail is in browse, so banned users can view mail
+**************************************************************************************************/
+Route::group(['prefix' => 'mail', 'namespace' => 'Users'], function () {
+    Route::get('/', 'MailController@getIndex');
+    Route::get('view/{id}', 'MailController@getUserMail');
+    Route::post('view/{id}', 'MailController@postCreateUserMail');
+
+    Route::get('new', 'MailController@getCreateUserMail');
+    Route::post('new/{id?}', 'MailController@postCreateUserMail');
+});

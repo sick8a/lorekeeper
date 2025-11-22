@@ -19,55 +19,27 @@
     @endif
 
     @include('character._header', ['character' => $character])
-
+      
     {{-- Main Image --}}
     <div class="row mb-3">
         <div class="col-md-7">
-            @if (isset($foreground) && is_array($foreground) && Config::get('lorekeeper.extensions.character_foregrounds.enabled'))
+            @if(isset($foreground) && is_array($foreground) && Config::get('lorekeeper.extensions.character_foregrounds.enabled'))
                 <div class="text-center" style="position: relative; display: inline-block;">
                     <!-- Foreground Overlays -->
-                    @foreach ($foreground as $data)
-                        @php
-                            // Read custom offset data
-                            $css = $data['css_data'] ?? [];
-                            $customStyles = '';
-
-                            // Apply custom TOP offset if available
-                            if (isset($css['top-offset'])) {
-                                $customStyles .= "top: {$css['top-offset']}; ";
-                            }
-                            // Apply custom RIGHT offset if available
-                            if (isset($css['right-offset'])) {
-                                $customStyles .= "right: {$css['right-offset']}; ";
-                            }
-
-                            // Apply custom LEFT offset if available
-                            if (isset($css['left-offset'])) {
-                                $customStyles .= "left: {$css['left-offset']}; ";
-                            }
-
-                            // Apply custom BOTTOM offset if available
-                            if (isset($css['bottom-offset'])) {
-                                $customStyles .= "bottom: {$css['bottom-offset']}; ";
-                            }
-                        @endphp
-                        <div
-                            style="background-image: url('{{ asset('images/data/items/foregrounds/' . $data['item_id'] . '/' . $data['tag_id'] . '/' . $data['tag_id'] . '-image.png') }}'); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-repeat: no-repeat; z-index: {{ $loop->index + 2 }}; {{ $customStyles }};">
+                    @foreach($foreground as $data)
+                        <div style="background-image: url('{{asset("images/data/items/foregrounds/" . $data['item_id'] . "/" . $data['tag_id'] . "/" . $data['tag_id'] . "-image.png") 
+                            }}'); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-repeat: no-repeat; z-index: {{ $loop->index + 2 }};">
                         </div>
                     @endforeach
-                    <a href="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-                        data-lightbox="entry" data-title="{{ $character->fullName }}">
-                        <img src="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-                            class="image" alt="{{ $character->fullName }}" />
+                    <a href="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists( public_path($character->image->imageDirectory.'/'.$character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}" data-lightbox="entry" data-title="{{ $character->fullName }}">
+                        <img src="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists( public_path($character->image->imageDirectory.'/'.$character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}" class="image" alt="{{ $character->fullName }}" />
                     </a>
                 </div>
             @else
-                {{-- Original Main Image --}}
+            {{-- Original Main Image --}}
                 <div class="text-center">
-                    <a href="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-                        data-lightbox="entry" data-title="{{ $character->fullName }}">
-                        <img src="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists(public_path($character->image->imageDirectory . '/' . $character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}"
-                            class="image" alt="{{ $character->fullName }}" />
+                    <a href="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists( public_path($character->image->imageDirectory.'/'.$character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}" data-lightbox="entry" data-title="{{ $character->fullName }}">
+                        <img src="{{ $character->image->canViewFull(Auth::check() ? Auth::user() : null) && file_exists( public_path($character->image->imageDirectory.'/'.$character->image->fullsizeFileName)) ? $character->image->fullsizeUrl : $character->image->imageUrl }}" class="image" alt="{{ $character->fullName }}" />
                     </a>
                 </div>
             @endif

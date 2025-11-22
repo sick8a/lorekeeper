@@ -111,14 +111,6 @@ class ForegroundService extends Service
             ->get();
     
         $foregroundData = [];
-    
-        // foreach ($items as $item) {
-        //     // Ensure each item has the 'foreground' tag and valid data
-        //     $tag = $item->tag('foreground');
-        //     if ($tag && $tag->is_active && isset($tag->id)) {
-        //         $foregroundTagIds[] = (int) $tag->id; // Add the tag's id as an integer to the list
-        //     }
-        // }
 
         foreach ($items as $item) {
             $tag = $item->tag('foreground');

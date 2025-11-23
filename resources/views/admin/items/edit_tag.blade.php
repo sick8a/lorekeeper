@@ -11,8 +11,9 @@
         Edit Tag Settings - {!! $tag->displayTag !!}
         <a href="#" class="btn btn-outline-danger float-right delete-tag-button">Delete Tag</a>
     </h1>
-	
-    <p>Edit the parameters for this item tag on this item. Note that for the item tag to take effect (e.g. become a usable item), you will need to turn on the Active toggle. (Conversely, you can turn it off to prevent users from using it while preserving the old settings for future use.)</p>
+
+    <p>Edit the parameters for this item tag on this item. Note that for the item tag to take effect (e.g. become a usable item), you will need to turn on the Active toggle. (Conversely, you can turn it off to prevent users from using it while preserving
+        the old settings for future use.)</p>
 
     @if (View::exists('admin.items.tags.' . $tag->tag . '_pre'))
         @include('admin.items.tags.' . $tag->tag . '_pre', ['item' => $item, 'tag' => $tag])

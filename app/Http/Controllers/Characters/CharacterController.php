@@ -117,12 +117,15 @@ class CharacterController extends Controller {
     public function getCharacter($slug) {
         $foreground = new \App\Services\Item\ForegroundService;
         $fg = $foreground->checkForeground($this->character);
+		$background = new \App\Services\Item\BackgroundService;
+        $bg = $background->checkBackground($this->character);
 
         return view('character.character', [
             'character'             => $this->character,
             'showMention'           => true,
             'extPrevAndNextBtnsUrl' => '',
-            'foreground'                   => $fg,
+            'foreground'            => $fg,
+			'background' 			=> $bg,
         ]);
     }
 
@@ -136,11 +139,14 @@ class CharacterController extends Controller {
     public function getCharacterProfile($slug) {
         $foreground = new \App\Services\Item\ForegroundService;
         $fg = $foreground->checkForeground($this->character);
+		$background = new \App\Services\Item\BackgroundService;
+        $bg = $background->checkBackground($this->character);
 
         return view('character.profile', [
             'character'             => $this->character,
             'extPrevAndNextBtnsUrl' => '/profile',
             'foreground'            => $fg,
+			'background' 			=> $bg,
         ]);
     }
 

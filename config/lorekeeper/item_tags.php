@@ -30,4 +30,10 @@ return [
         'text_color'       => 'black',
         'background_color' => 'lightblue'
     ],
+	
+    'background' => [
+        'name' => 'Background',
+        'text_color' => 'antiquewhite',
+        'background_color' => 'slategrey'
+    ],
 ];

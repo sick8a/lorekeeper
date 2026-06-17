@@ -442,20 +442,22 @@ function createRewardsString($array) {
 }
 
 /**
- * Rewards list for user notification
+ * Rewards list for user notification.
  *
- * @param  array                  $rewards
+ * @param array $rewards
+ *
  * @return string
  */
 function getRewardsString($rewards) {
-    $results = "You have received: ";
+    $results = 'You have received: ';
     $result_elements = [];
     foreach ($rewards as $assetType) {
         if (isset($assetType)) {
             foreach ($assetType as $asset) {
-                array_push($result_elements, $asset['asset']->name . (class_basename($asset['asset']) == 'Raffle' ? ' (Raffle Ticket)' : '') . " x" . $asset['quantity']);
+                array_push($result_elements, $asset['asset']->name.(class_basename($asset['asset']) == 'Raffle' ? ' (Raffle Ticket)' : '').' x'.$asset['quantity']);
             }
         }
     }
-    return $results . implode(', ', $result_elements);
+
+    return $results.implode(', ', $result_elements);
 }

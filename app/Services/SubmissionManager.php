@@ -10,6 +10,7 @@ use App\Models\Item\Item;
 use App\Models\Loot\LootTable;
 use App\Models\Prompt\Prompt;
 use App\Models\Raffle\Raffle;
+use App\Models\Recipe\Recipe;
 use App\Models\Submission\Submission;
 use App\Models\Submission\SubmissionCharacter;
 use App\Models\User\User;
@@ -565,11 +566,10 @@ class SubmissionManager extends Service {
      * @param array $data
      * @param bool  $isCharacter
      * @param bool  $isStaff
-     * @param bool  $isClaim
      *
      * @return array
      */
-    private function processRewards($data, $isCharacter, $isStaff = false, $isClaim = false) {
+    private function processRewards($data, $isCharacter, $isStaff = false) {
         if ($isCharacter) {
             $assets = createAssetsArray(true);
 
@@ -621,10 +621,19 @@ class SubmissionManager extends Service {
                             $reward = LootTable::find($data['rewardable_id'][$key]);
                             break;
                         case 'Raffle':
-                            if (!$isStaff && !$isClaim) {
+                            if (!$isStaff) {
                                 break;
                             }
                             $reward = Raffle::find($data['rewardable_id'][$key]);
+                            break;
+                        case 'Recipe':
+                            if (!$isStaff) {
+                                break;
+                            }
+                            $reward = Recipe::find($data['rewardable_id'][$key]);
+                            if (!$reward->needs_unlocking) {
+                                throw new \Exception('Invalid recipe selected.');
+                            }
                             break;
                     }
                     if (!$reward) {

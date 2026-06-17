@@ -10,6 +10,7 @@ use App\Models\Item\Item;
 use App\Models\Item\ItemCategory;
 use App\Models\Prompt\Prompt;
 use App\Models\Raffle\Raffle;
+use App\Models\Recipe\Recipe;
 use App\Models\Submission\Submission;
 use App\Models\User\User;
 use App\Models\User\UserItem;
@@ -364,6 +365,7 @@ class SubmissionController extends Controller {
             'raffles'             => Raffle::where('rolled_at', null)->where('is_active', 1)->orderBy('name')->pluck('name', 'id'),
             'page'                => 'submission',
             'expanded_rewards'    => config('lorekeeper.extensions.character_reward_expansion.expanded'),
+            'recipes'             => Recipe::orderBy('name')->pluck('name', 'id'),
         ]));
     }
 

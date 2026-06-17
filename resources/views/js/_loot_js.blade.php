@@ -10,6 +10,9 @@
         @if ($showRaffles)
             var $raffleSelect = $('#lootRowData').find('.raffle-select');
         @endif
+        @if ($showRecipes)
+            var $recipeSelect = $('#lootRowData').find('.recipe-select');
+        @endif
 
         $('#lootTableBody .selectize').selectize();
         attachRemoveListener($('#lootTableBody .remove-loot-button'));
@@ -24,7 +27,7 @@
 
         $('.reward-type').on('change', function(e) {
             var val = $(this).val();
-            var $cell = $(this).parent().parent().find('.loot-row-select');
+            var $cell = $(this).parent().find('.loot-row-select');
 
             var $clone = null;
             if (val == 'Item') $clone = $itemSelect.clone();
@@ -34,6 +37,9 @@
             @endif
             @if ($showRaffles)
                 else if (val == 'Raffle') $clone = $raffleSelect.clone();
+            @endif
+            @if ($showRecipes)
+                else if (val == 'Recipe') $clone = $recipeSelect.clone();
             @endif
 
             $cell.html('');
@@ -53,6 +59,9 @@
                 @endif
                 @if ($showRaffles)
                     else if (val == 'Raffle') $clone = $raffleSelect.clone();
+                @endif
+                @if ($showRecipes)
+                    else if (val == 'Recipe') $clone = $recipeSelect.clone();
                 @endif
 
                 $cell.html('');

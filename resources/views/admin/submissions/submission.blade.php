@@ -75,7 +75,7 @@
 
         <h2>Rewards</h2>
         @include('widgets._loot_select', ['loots' => $submission->rewards, 'showLootTables' => true, 'showRaffles' => true, 'showRecipes' => true])
-        @if($submission->prompt_id)
+        @if ($submission->prompt_id)
             <div class="mb-3">
                 @include('home._prompt', ['prompt' => $submission->prompt, 'staffView' => true])
             </div>
@@ -275,10 +275,10 @@
 @endsection
 
 @section('scripts')
-@parent
-@if($submission->status == 'Pending')
-    @include('js._loot_js', ['showLootTables' => true, 'showRaffles' => true, 'showRecipes' => true])
-    @include('js._character_select_js')
+    @parent
+    @if ($submission->status == 'Pending')
+        @include('js._loot_js', ['showLootTables' => true, 'showRaffles' => true, 'showRecipes' => true])
+        @include('js._character_select_js')
 
         <script>
             $(document).ready(function() {

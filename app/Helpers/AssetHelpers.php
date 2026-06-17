@@ -154,10 +154,12 @@ function getAssetModelString($type, $namespaced = true) {
             break;
 
         case 'themes':
-            if ($namespaced) return '\App\Models\Theme';
-            else return 'Theme';
+            if ($namespaced) {
+                return '\App\Models\Theme';
+            } else {
+                return 'Theme';
+            }
             break;
-    
     }
 
     return null;
@@ -345,7 +347,7 @@ function fillUserAssets($assets, $sender, $recipient, $logType, $data) {
                 }
             }
         } elseif ($key == 'themes' && count($contents)) {
-            $service = new \App\Services\ThemeManager;
+            $service = new App\Services\ThemeManager;
             foreach ($contents as $asset) {
                 if (!$service->creditTheme($recipient, $asset['asset'])) {
                     return false;

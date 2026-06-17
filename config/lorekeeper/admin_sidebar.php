@@ -263,7 +263,7 @@ return [
             ],
             [
                 'name' => 'Site Design',
-                'url' => 'admin/design'
+                'url'  => 'admin/design',
             ],
             [
                 'name' => 'File Manager',
@@ -271,8 +271,8 @@ return [
             ],
             [
                 'name' => 'Theme Manager',
-                'url' => 'admin/themes'
+                'url'  => 'admin/themes',
             ],
-        ]
+        ],
     ],
 ];

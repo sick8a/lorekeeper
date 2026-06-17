@@ -171,48 +171,44 @@ class PromptController extends Controller {
         return view('admin.prompts.prompts', [
             'prompts'          => $query->paginate(20)->appends($request->query()),
             'categories'       => ['none' => 'Any Category'] + PromptCategory::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-            'promptCategories' => PromptCategory::orderBy('sort', 'DESC')->get()->prepend([ "id" => 0 ]),
+            'promptCategories' => PromptCategory::orderBy('sort', 'DESC')->get()->prepend(['id' => 0]),
             'pickPrompts'      => $query->get()->groupBy('prompt_category_id'),
-            'count'            => Prompt::all()
+            'count'            => Prompt::all(),
         ]);
     }
-
-
 
     /**
      * Shows the prompt category index using the original code.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getPromptIndexOld(Request $request)
-    {
-
+    public function getPromptIndexOld(Request $request) {
         $query = Prompt::query();
 
         $data = $request->only(['prompt_category_id', 'name']);
-        if(isset($data['prompt_category_id']) && $data['prompt_category_id'] != 'none')
+        if (isset($data['prompt_category_id']) && $data['prompt_category_id'] != 'none') {
             $query->where('prompt_category_id', $data['prompt_category_id']);
-        if(isset($data['name']))
+        }
+        if (isset($data['name'])) {
             $query->where('name', 'LIKE', '%'.$data['name'].'%');
+        }
 
-        if(isset($data['prompt_category_id']) && $data['prompt_category_id'] != 'none')
+        if (isset($data['prompt_category_id']) && $data['prompt_category_id'] != 'none') {
             $query->where('prompt_category_id', $data['prompt_category_id']);
-        if(isset($data['name']))
+        }
+        if (isset($data['name'])) {
             $query->where('name', 'LIKE', '%'.$data['name'].'%');
+        }
 
         return view('admin.prompts.prompts_old', [
-            'prompts' => $query->paginate(20)->appends($request->query()),
+            'prompts'    => $query->paginate(20)->appends($request->query()),
             'categories' => ['none' => 'Any Category'] + PromptCategory::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
 
-            'promptCategories' => PromptCategory::orderBy('sort', 'DESC')->get()->prepend([ "id" => 0 ]),
-            'pickPrompts' => $query->get()->groupBy('prompt_category_id'),
-            'count' => Prompt::all()
+            'promptCategories' => PromptCategory::orderBy('sort', 'DESC')->get()->prepend(['id' => 0]),
+            'pickPrompts'      => $query->get()->groupBy('prompt_category_id'),
+            'count'            => Prompt::all(),
         ]);
     }
-
-
-
 
     /**
      * Shows the create prompt page.

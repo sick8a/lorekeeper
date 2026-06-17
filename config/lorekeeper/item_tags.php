@@ -30,4 +30,10 @@ return [
         'text_color'       => '#ffffff',
         'background_color' => '#6D18A7',
     ],
+
+    'theme' => [
+        'name' => 'Theme',
+        'text_color' => "#ffffff",
+        'background_color' => '#573f7e'
+    ],
 ];

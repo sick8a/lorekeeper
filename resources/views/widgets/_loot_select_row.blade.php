@@ -26,7 +26,7 @@
             <tr class="loot-row">
                 <td>{!! Form::select(
                     'rewardable_type[]',
-                    ['Item' => 'Item', 'Currency' => 'Currency'] + ($showLootTables ? ['LootTable' => 'Loot Table'] : []) + ($showRaffles ? ['Raffle' => 'Raffle Ticket'] : []) + ($showRecipes ? ['Recipe' => 'Recipe'] : []),
+                    ['Item' => 'Item', 'Currency' => 'Currency'] + ($showLootTables ? ['LootTable' => 'Loot Table'] : []) + ($showRaffles ? ['Raffle' => 'Raffle Ticket'] : []) + ($showRecipes ? ['Recipe' => 'Recipe'] : []) + (isset($showThemes) && $showThemes ? ['Theme' => 'Theme'] : []),
                     null,
                     ['class' => 'form-control reward-type', 'placeholder' => 'Select Reward Type'],
                 ) !!}</td>
@@ -46,5 +46,8 @@
     @endif
     @if ($showRecipes)
         {!! Form::select('rewardable_id[]', $recipes, null, ['class' => 'form-control recipe-select', 'placeholder' => 'Select Recipe']) !!}
+    @endif
+    @if(isset($showThemes) && $showThemes)
+        {!! Form::select('rewardable_id[]', $themes, null, ['class' => 'form-control theme-select', 'placeholder' => 'Select Theme']) !!}
     @endif
 </div>

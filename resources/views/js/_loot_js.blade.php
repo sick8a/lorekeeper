@@ -13,6 +13,12 @@
         @if ($showRecipes)
             var $recipeSelect = $('#lootRowData').find('.recipe-select');
         @endif
+        @if(isset($showThemes) && $showThemes)
+            var $themeSelect = $('#lootRowData').find('.theme-select');
+        @endif
+        @if(isset($showThemes) && $showThemes)
+            else if (val == 'Theme') $clone = $themeSelect.clone();
+        @endif
 
         $('#lootTableBody .selectize').selectize();
         attachRemoveListener($('#lootTableBody .remove-loot-button'));
@@ -40,6 +46,9 @@
             @endif
             @if ($showRecipes)
                 else if (val == 'Recipe') $clone = $recipeSelect.clone();
+            @endif
+            @if(isset($showThemes) && $showThemes)
+                else if (val == 'Theme') $clone = $themeSelect.clone();
             @endif
 
             $cell.html('');

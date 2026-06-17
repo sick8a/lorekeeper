@@ -8,6 +8,11 @@ use App\Models\User\User;
 use App\Models\User\UserAlias;
 use App\Models\WorldExpansion\Faction;
 use App\Models\WorldExpansion\Location;
+use File;
+use Image;
+use App\Models\Theme;
+use Illuminate\Support\Facades\Storage;
+use App\Models\ThemeEditor;
 use App\Services\LinkService;
 use App\Services\UserService;
 use BaconQrCode\Renderer\Color\Rgb;
@@ -65,6 +70,7 @@ class AccountController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getSettings() {
+        $user = Auth::user();
         $interval = [
             0 => 'whenever',
             1 => 'yearly',
@@ -74,6 +80,16 @@ class AccountController extends Controller {
             5 => 'daily',
         ];
 
+        if ($user->isStaff || $user->isAdmin) {
+            // staff can see all active themes
+            $themeOptions = ['0' => 'Select Theme'] + Theme::where('is_active', 1)->where('theme_type', 'base')->get()->pluck('displayName', 'id')->toArray();
+        } else {
+            // members can only see active themes that are user selectable
+            $themeOptions = ['0' => 'Select Theme'] + Theme::where('is_active', 1)->where('theme_type', 'base')->where('is_user_selectable', 1)->get()->pluck('displayName', 'id')->toArray();
+        }
+
+        $decoratorOptions = ['0' => 'Select Decorator Theme'] + Theme::where('is_active', 1)->where('theme_type', 'decorator')->where('is_user_selectable', 1)->get()->pluck('displayName', 'id')->toArray();
+
         return view('account.settings', [
             'locations'            => Location::all()->where('is_user_home')->pluck('style', 'id')->toArray(),
             'factions'             => Faction::all()->where('is_user_faction')->pluck('style', 'id')->toArray(),
@@ -82,6 +98,9 @@ class AccountController extends Controller {
             'char_enabled'         => Settings::get('WE_character_locations'),
             'char_faction_enabled' => Settings::get('WE_character_factions'),
             'location_interval'    => $interval[Settings::get('WE_change_timelimit')],
+            'themeOptions' => $themeOptions + Auth::user()->themes()->where('theme_type', 'base')->get()->pluck('displayName', 'id')->toArray(),
+            'decoratorThemes' => $decoratorOptions + Auth::user()->themes()->where('theme_type', 'decorator')->get()->pluck('displayName', 'id')->toArray(),
+
         ]);
     }
 
@@ -113,6 +132,22 @@ class AccountController extends Controller {
             foreach ($service->errors()->getMessages()['error'] as $error) {
                 flash($error)->error();
             }
+        }
+
+        return redirect()->back();
+    }
+
+    /**
+     * Edits the user's theme.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postTheme(Request $request, UserService $service) {
+        if ($service->updateTheme($request->only(['theme', 'decorator_theme']), Auth::user())) {
+            flash('Theme updated successfully.')->success();
+        } else {
+            foreach ($service->errors()->getMessages()['error'] as $error) flash($error)->error();
         }
 
         return redirect()->back();

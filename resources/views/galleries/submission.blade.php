@@ -239,12 +239,21 @@
         </div>
     </div>
 
+<<<<<<< HEAD
     <!-- Comments -->
     @if ($submission->isVisible)
         <div class="container">
             @comments(['model' => $submission, 'perPage' => 5])
         </div>
     @endif
+=======
+<!-- Comments -->
+@if($submission->isVisible)
+    @comments(['model' => $submission,
+            'perPage' => 5
+        ])
+@endif
+>>>>>>> 27aef7d3e381bcd09e252376b3e056de1df7a1c2
 
 @endsection
 

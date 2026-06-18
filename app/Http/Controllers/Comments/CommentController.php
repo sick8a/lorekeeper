@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Honeypot\ProtectAgainstSpam;
 
-class CommentController extends Controller implements CommentControllerInterface {
+class CommentController extends Controller {
     public function __construct() {
         $this->middleware('web');
 

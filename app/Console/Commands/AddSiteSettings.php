@@ -73,6 +73,8 @@ class AddSiteSettings extends Command {
 
         $this->addSiteSetting('group_currency', 1, 'ID of the group currency to award from gallery submissions (if enabled).');
 
+        $this->addSiteSetting('max_strike_count', 3, 'Number of strikes a user can have before being automatically banned.');
+
         $this->addSiteSetting('is_maintenance_mode', 0, '0: Site is normal, 1: Users without the Has Maintenance Access power will be redirected to the home page.');
 
         $this->addSiteSetting('default_side', 0, 'The default "longest side" of a character image if the image is actually square. 0 = square, 1 = width, 2 = height');

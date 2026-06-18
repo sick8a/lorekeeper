@@ -1,6 +1,10 @@
 <ul>
     <li class="sidebar-header"><a href="{{ url('/') }}" class="card-link">Home</a></li>
     <li class="sidebar-section">
+        <div class="sidebar-section-header">Mail</div>
+        <div class="sidebar-item"><a href="{{ url('mail') }}" class="{{ set_active('mail*') }}">All Mail</a></div>
+    </li>
+    <li class="sidebar-section">
         <div class="sidebar-section-header">Inventory</div>
         <div class="sidebar-item"><a href="{{ url('characters') }}" class="{{ set_active('characters') }}">My Characters</a></div>
         <div class="sidebar-item"><a href="{{ url('characters/myos') }}" class="{{ set_active('characters/myos') }}">My MYO Slots</a></div>

@@ -493,4 +493,11 @@ return [
         'message' => '<a href="{sender_url}">{sender_name}</a> has sent you a direct message with the subject line: "{subject}". <a href="{url}">See Context</a>.',
         'url'     => 'mail/view/{mail_id}',
     ],
+
+        // BIRTHDAY_REWARDED
+        1105 => [
+            'name' => 'Happy Birthday to You',
+            'message' => 'It\'s your birthday this month, {user_name}! A gift has been left in your inventory. (<a href="{url}">View Inventory</a>)',
+            'url' => 'inventory'
+        ],
 ];

@@ -11,7 +11,7 @@
         @if ($showRaffles)
             var $raffleSelect = $('#lootRowData').find('.raffle-select');
         @endif
-        @if ($showRecipes)
+        @if(isset($showRecipes) && $showRecipes)
             var $recipeSelect = $('#lootRowData').find('.recipe-select');
         @endif
         @if(isset($showThemes) && $showThemes)
@@ -46,7 +46,7 @@
             @if ($showRaffles)
                 else if (val == 'Raffle') $clone = $raffleSelect.clone();
             @endif
-            @if ($showRecipes)
+            @if(isset($showRecipes) && $showRecipes)
                 else if (val == 'Recipe') $clone = $recipeSelect.clone();
             @endif
             @if(isset($showThemes) && $showThemes)
@@ -72,7 +72,7 @@
                 @if ($showRaffles)
                     else if (val == 'Raffle') $clone = $raffleSelect.clone();
                 @endif
-                @if ($showRecipes)
+                @if(isset($showRecipes) && $showRecipes)
                     else if (val == 'Recipe') $clone = $recipeSelect.clone();
                 @endif
 

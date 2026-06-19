@@ -31,7 +31,6 @@ class Kernel extends ConsoleKernel {
             ->daily();
         $schedule->command('distribute-birthday-rewards')
             ->monthly();
-
     }
 
     /**

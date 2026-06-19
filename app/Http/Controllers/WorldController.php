@@ -188,7 +188,7 @@ class WorldController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getFeatures(Request $request) {
-        $query = Feature::visible(Auth::check() ? Auth::user() : null)->with('category', 'rarity', 'species', 'subtype');
+$query = Feature::visible(Auth::check() ? Auth::user() : null)->with('category', 'rarity', 'species', 'subtype')->where('display_separate', 1);
 
         $data = $request->only(['rarity_id', 'feature_category_id', 'species_id', 'subtype_id', 'name', 'sort']);
 
@@ -291,6 +291,7 @@ class WorldController extends Controller {
             $species->features()
                 ->visible(Auth::check() ? Auth::user() : null)
                 ->with('rarity', 'subtype')
+                ->where('display_separate', 1)
                 ->orderByRaw('FIELD(feature_category_id,'.implode(',', $categories->pluck('id')->toArray()).')')
                 ->orderByRaw('FIELD(rarity_id,'.implode(',', $rarities->pluck('id')->toArray()).')')
                 ->orderBy('has_image', 'DESC')
@@ -307,6 +308,7 @@ class WorldController extends Controller {
             $species->features()
                 ->visible(Auth::check() ? Auth::user() : null)
                 ->with('rarity', 'subtype')
+                ->where('display_separate', 1)
                 ->orderByRaw('FIELD(rarity_id,'.implode(',', $rarities->pluck('id')->toArray()).')')
                 ->orderBy('has_image', 'DESC')
                 ->orderBy('name')

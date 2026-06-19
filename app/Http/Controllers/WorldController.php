@@ -8,6 +8,7 @@ use App\Models\Character\CharacterCategory;
 use App\Models\Currency\Currency;
 use App\Models\Feature\Feature;
 use App\Models\Feature\FeatureCategory;
+use App\Models\Feature\FeatureSubcategory;
 use App\Models\Item\Item;
 use App\Models\Item\ItemCategory;
 use App\Models\Rarity;
@@ -166,6 +167,22 @@ class WorldController extends Controller {
     }
 
     /**
+     * Shows the trait subcategories page.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getFeatureSubcategories(Request $request)
+    {
+        $query = FeatureSubcategory::query();
+        $name = $request->get('name');
+        if($name) $query->where('name', 'LIKE', '%'.$name.'%');
+        return view('world.feature_subcategories', [
+            'subcategories' => $query->orderBy('sort', 'DESC')->paginate(20)->appends($request->query()),
+        ]);
+    }
+
+    /**
      * Shows the traits page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
@@ -184,6 +201,9 @@ class WorldController extends Controller {
             } else {
                 $query->where('feature_category_id', $data['feature_category_id']);
             }
+        }
+        if(isset($data['feature_subcategory_id']) && $data['feature_subcategory_id'] != 'none') {
+            $query->where('feature_subcategory_id', $data['feature_subcategory_id']);
         }
         if (isset($data['species_id']) && $data['species_id'] != 'none') {
             if ($data['species_id'] == 'withoutOption') {
@@ -238,11 +258,12 @@ class WorldController extends Controller {
         }
 
         return view('world.features', [
-            'features'   => $query->orderBy('id')->paginate(20)->appends($request->query()),
-            'rarities'   => ['none' => 'Any Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-            'specieses'  => ['none' => 'Any Species'] + ['withoutOption' => 'Without Species'] + Species::visible(Auth::check() ? Auth::user() : null)->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-            'subtypes'   => ['none' => 'Any Subtype'] + ['withoutOption' => 'Without Subtype'] + Subtype::visible(Auth::check() ? Auth::user() : null)->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
-            'categories' => ['none' => 'Any Category'] + ['withoutOption' => 'Without Category'] + FeatureCategory::visible(Auth::check() ? Auth::user() : null)->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'features'      => $query->orderBy('id')->paginate(20)->appends($request->query()),
+            'rarities'      => ['none' => 'Any Rarity'] + Rarity::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'specieses'     => ['none' => 'Any Species'] + ['withoutOption' => 'Without Species'] + Species::visible(Auth::check() ? Auth::user() : null)->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'subtypes'      => ['none' => 'Any Subtype'] + ['withoutOption' => 'Without Subtype'] + Subtype::visible(Auth::check() ? Auth::user() : null)->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'categories'    => ['none' => 'Any Category'] + ['withoutOption' => 'Without Category'] + FeatureCategory::visible(Auth::check() ? Auth::user() : null)->orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
+            'subcategories' => ['none' => 'Any Subcategory'] + FeatureSubcategory::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray()
         ]);
     }
 
@@ -255,6 +276,7 @@ class WorldController extends Controller {
      */
     public function getSpeciesFeatures($id) {
         $categories = FeatureCategory::orderBy('sort', 'DESC')->get();
+        $subcategories = FeatureSubcategory::orderBy('sort', 'DESC')->get();
         $rarities = Rarity::orderBy('sort', 'ASC')->get();
 
         $species = Species::visible(Auth::check() ? Auth::user() : null)->where('id', $id)->first();
@@ -303,6 +325,7 @@ class WorldController extends Controller {
             'categories' => $categories->keyBy('id'),
             'rarities'   => $rarities->keyBy('id'),
             'features'   => $features,
+            'subcategories' => $subcategories->keyBy('id'),
         ]);
     }
 

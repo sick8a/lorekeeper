@@ -100,8 +100,7 @@ Route::group(['prefix' => 'myo', 'namespace' => 'Characters'], function () {
 });
 
 Route::get('/'.__('character_likes.likes').'-leaderboard', 'BrowseController@getLikesLeaderboard');
-Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function() {
-});
+Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function () {});
 
 /**************************************************************************************************
     World

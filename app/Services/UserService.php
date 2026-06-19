@@ -765,10 +765,12 @@ class UserService extends Service {
     }
 
     /**
-     * Change character like settings
+     * Change character like settings.
+     *
+     * @param mixed $data
+     * @param mixed $user
      */
-    public function updateAllowCharacterLikes($data, $user)
-    {
+    public function updateAllowCharacterLikes($data, $user) {
         $user->settings->allow_character_likes = $data;
         $user->settings->save();
 

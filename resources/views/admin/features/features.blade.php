@@ -19,25 +19,25 @@
 
     <div>
         {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}
-        <div class="form-group mr-3 mb-3">
+        <div class="form-group mr-2 mb-3">
             {!! Form::text('name', Request::get('name'), ['class' => 'form-control', 'placeholder' => 'Name']) !!}
         </div>
-        <div class="form-group mr-3 mb-3">
+        <div class="form-group mr-2 mb-3">
             {!! Form::select('species_id', $specieses, Request::get('species_id'), ['class' => 'form-control']) !!}
         </div>
-        <div class="form-group mr-3 mb-3">
+        <div class="form-group mr-2 mb-3">
             {!! Form::select('subtype_id', $subtypes, Request::get('subtype_id'), ['class' => 'form-control']) !!}
         </div>
-        <div class="form-group mr-3 mb-3">
+        <div class="form-group mr-2 mb-3">
             {!! Form::select('rarity_id', $rarities, Request::get('rarity_id'), ['class' => 'form-control']) !!}
         </div>
-        <div class="form-group mr-3 mb-3">
+        <div class="form-group mr-2 mb-3">
             {!! Form::select('feature_category_id', $categories, Request::get('feature_category_id'), ['class' => 'form-control']) !!}
         </div>
-        <div class="form-group mr-3 mb-3">
+        <div class="form-group mr-2 mb-3">
             {!! Form::select('feature_subcategory_id', $subcategories, Request::get('feature_subcategory_id'), ['class' => 'form-control']) !!}
         </div>
-        <div class="form-group mb-3">
+        <div class="form-group mb-2">
             {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
         </div>
         {!! Form::close() !!}
@@ -50,14 +50,17 @@
         <div class="mb-4 logs-table">
             <div class="logs-table-header">
                 <div class="row">
-                    <div class="col-12 col-md-3">
+                    <div class="col-12 col-md-1">
                         <div class="logs-table-cell">Name</div>
                     </div>
-                    <div class="col-6 col-md-2">
+                    <div class="col-6 col-sm-2">
                         <div class="logs-table-cell">Rarity</div>
                     </div>
                     <div class="col-6 col-md-2">
                         <div class="logs-table-cell">Category</div>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <div class="logs-table-cell">Subategory</div>
                     </div>
                     <div class="col-6 col-md-2">
                         <div class="logs-table-cell">Species</div>
@@ -71,7 +74,7 @@
                 @foreach ($features as $feature)
                     <div class="logs-table-row">
                         <div class="row flex-wrap">
-                            <div class="col-12 col-md-3">
+                            <div class="col-12 col-md-1">
                                 <div class="logs-table-cell">
                                     @if (!$feature->is_visible)
                                         <i class="fas fa-eye-slash mr-1"></i>
@@ -79,11 +82,14 @@
                                     {{ $feature->name }}
                                 </div>
                             </div>
-                            <div class="col-6 col-md-2">
+                            <div class="col-6 col-sm-2">
                                 <div class="logs-table-cell">{!! $feature->rarity->displayName !!}</div>
                             </div>
                             <div class="col-6 col-md-2">
                                 <div class="logs-table-cell">{{ $feature->category ? $feature->category->name : '---' }}</div>
+                            </div>
+                            <div class="col-6 col-md-2">
+                                <div class="logs-table-cell">{{ $feature->subcategory ? $feature->subcategory->name : '---' }}</div>
                             </div>
                             <div class="col-6 col-md-2">
                                 <div class="logs-table-cell">{{ $feature->species ? $feature->species->name : '---' }}</div>

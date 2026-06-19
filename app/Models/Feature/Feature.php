@@ -15,7 +15,7 @@ class Feature extends Model {
      * @var array
      */
     protected $fillable = [
-        'feature_category_id','feature_subcategory_id', 'species_id', 'subtype_id',
+        'feature_category_id', 'feature_subcategory_id', 'species_id', 'subtype_id',
         'rarity_id', 'name', 'has_image', 'description', 'parsed_description', 'is_visible',
         'hash', 'parent_id', 'display_mode', 'display_separate',
     ];

@@ -322,9 +322,9 @@ class FeatureService extends Service {
     /**
      * Creates a new feature.
      *
-     * @param array                       $data
-     * @param \App\Models\User\User       $user
-     * @param \App\Models\Feature\Feature $parent
+     * @param array                 $data
+     * @param \App\Models\User\User $user
+     * @param Feature               $parent
      *
      * @return bool|Feature
      */
@@ -414,7 +414,7 @@ class FeatureService extends Service {
      * @param Feature               $feature
      * @param array                 $data
      * @param \App\Models\User\User $user
-     * @param \App\Models\Feature\Feature $parent
+     * @param Feature               $parent
      *
      * @return bool|Feature
      */

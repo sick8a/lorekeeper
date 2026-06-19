@@ -282,6 +282,14 @@ class User extends Authenticatable implements MustVerifyEmail {
         return $this->hasMany(CommentLike::class);
     }
 
+    /**
+     * Get all of the user's character like data.
+     */
+    public function characterLikes() 
+    {
+        return $this->hasMany('App\Models\Character\CharacterLike')->where('user_id', $this->id);
+    }
+
     /**********************************************************************************************
 
         SCOPES
@@ -1064,5 +1072,60 @@ class User extends Authenticatable implements MustVerifyEmail {
         // $count[] = $this->hasPower('manage_affiliates')     ? Affiliate::where('status', 'Pending')->count()                                : 0; //affiliateCount
 
         return array_sum($count);
+    }
+        
+    /**
+     * Check the user's like for the character
+     */
+    public function checkLike($character) {
+
+        //check for the like and create if nonexistent
+        
+        $like = $this->characterLikes()->where('character_id', $character->id)->first();
+
+        if (!$like) {
+            $createdlike = $this->characterLikes()->create([
+                'user_id'       => $this->id,
+                'character_id'     => $character->id,
+            ]);
+            $this->refresh();
+            $createdlike->refresh();
+        }
+    }
+
+    /**
+     * Check if user can like the character again
+     */
+    public function canLike($character) {
+
+        //triplecheck that a like exists even though we spammed this check literally everywhere.
+        $like = $this->characterLikes()->where('character_id', $character->id)->first();
+
+        if (!$like) {
+            $createdlike = $this->characterLikes()->create([
+                'user_id'       => $this->id,
+                'character_id'     => $character->id,
+            ]);
+            $this->refresh();
+            $createdlike->refresh();
+        }
+
+        //user disabled likes on their characters
+        if(!$character->user->settings->allow_character_likes) return false;
+
+        //already liked
+        if ($like->liked_at) {
+
+            //can only like once
+            if(!Settings::get('character_likes')) {
+                return false;
+            }
+            //can like daily
+            if ($like->liked_at->isToday()) {
+                return false;
+            }
+        }
+        //else you can :)
+        return true;
     }
 }

@@ -74,6 +74,10 @@ class AddSiteSettings extends Command {
         $this->addSiteSetting('group_currency', 1, 'ID of the group currency to award from gallery submissions (if enabled).');
 
         $this->addSiteSetting('max_strike_count', 3, 'Number of strikes a user can have before being automatically banned.');
+        
+        $this->addSiteSetting('character_likes', 1, '0: Characters can be liked only once, 1: Characters can be liked daily.');
+
+        $this->addSiteSetting('character_likes_leaderboard_enable', 1, '0: Disable leaderboard, 1: Enable leaderboard.');
 
         $this->addSiteSetting('birthday_item', 1, 'ID of item to be granted to a user on their birth month. Suggestion is to set this to a box type item.');
 

@@ -131,7 +131,7 @@ class GrantController extends Controller {
 
         return redirect()->back();
     }
-    
+
     /**
      * Grants or removes awards from multiple users.
      *

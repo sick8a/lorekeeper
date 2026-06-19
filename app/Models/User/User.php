@@ -859,8 +859,8 @@ class User extends Authenticatable implements MustVerifyEmail {
             return $query->paginate(30);
         }
     }
-    
-     /**
+
+    /**
      * Get the user's award logs.
      *
      * @param int $limit

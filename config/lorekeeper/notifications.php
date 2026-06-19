@@ -494,10 +494,10 @@ return [
         'url'     => 'mail/view/{mail_id}',
     ],
 
-        // BIRTHDAY_REWARDED
-        1105 => [
-            'name' => 'Happy Birthday to You',
-            'message' => 'It\'s your birthday this month, {user_name}! A gift has been left in your inventory. (<a href="{url}">View Inventory</a>)',
-            'url' => 'inventory'
-        ],
+    // BIRTHDAY_REWARDED
+    1105 => [
+        'name'    => 'Happy Birthday to You',
+        'message' => 'It\'s your birthday this month, {user_name}! A gift has been left in your inventory. (<a href="{url}">View Inventory</a>)',
+        'url'     => 'inventory',
+    ],
 ];

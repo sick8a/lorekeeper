@@ -113,6 +113,7 @@ Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function ()
     Route::get('{slug}/profile/edit', 'CharacterController@getEditCharacterProfile');
     Route::post('{slug}/profile/edit', 'CharacterController@postEditCharacterProfile');
 
+    Route::post('{slug}/'.__('awards.awardcase').'/edit', 'CharacterController@postAwardEdit');
     Route::post('{slug}/inventory/edit', 'CharacterController@postInventoryEdit');
 
     Route::post('{slug}/bank/transfer', 'CharacterController@postCurrencyTransfer');
@@ -257,4 +258,15 @@ Route::group(['prefix' => 'mail', 'namespace' => 'Users'], function () {
 
     Route::get('new', 'MailController@getCreateUserMail');
     Route::post('new/{id?}', 'MailController@postCreateUserMail');
+});
+
+/**************************************************************************************************
+    Awards
+**************************************************************************************************/
+Route::group(['prefix' => __('awards.awardcase'), 'namespace' => 'Users'], function () {
+    Route::get('/', 'AwardCaseController@getIndex');
+    Route::post('edit', 'AwardCaseController@postEdit');
+    Route::post('claim/{id}', 'AwardCaseController@postClaimAward');
+
+    Route::get('selector', 'AwardCaseController@getSelector');
 });

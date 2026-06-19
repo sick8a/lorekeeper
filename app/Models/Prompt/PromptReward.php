@@ -2,6 +2,7 @@
 
 namespace App\Models\Prompt;
 
+use App\Models\Award\Award;
 use App\Models\Currency\Currency;
 use App\Models\Item\Item;
 use App\Models\Loot\LootTable;
@@ -71,6 +72,9 @@ class PromptReward extends Model {
                 break;
             case 'Recipe':
                 return $this->belongsTo('App\Models\Recipe\Recipe', 'rewardable_id');
+                break;
+            case 'Award':
+                return $this->belongsTo(Award::class, 'rewardable_id');
                 break;
         }
 

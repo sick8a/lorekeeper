@@ -259,6 +259,10 @@ return [
                 'name' => 'Locations',
                 'url'  => 'admin/world/locations',
             ],
+            [
+                'name' => 'Carousel',
+                'url'  => 'admin/data/carousel',
+            ],
         ],
     ],
     'Raffles'    => [

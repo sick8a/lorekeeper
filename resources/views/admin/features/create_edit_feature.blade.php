@@ -252,7 +252,7 @@
                                 1 => 'Name (Species)',
                                 2 => 'Name (Subtype)',
                                 3 => 'Parent Name (Name)',
-                                4 => 'Name Parent Name',
+                                4 => 'Name (Parent Name)',
                             ],
                             0,
                             ['class' => 'form-control'],

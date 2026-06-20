@@ -50,10 +50,10 @@
         <div class="mb-4 logs-table">
             <div class="logs-table-header">
                 <div class="row">
-                    <div class="col-12 col-md-1">
+                    <div class="col-12 col-md-2">
                         <div class="logs-table-cell">Name</div>
                     </div>
-                    <div class="col-6 col-sm-2">
+                    <div class="col-6 col-md-2">
                         <div class="logs-table-cell">Rarity</div>
                     </div>
                     <div class="col-6 col-md-2">
@@ -74,7 +74,7 @@
                 @foreach ($features as $feature)
                     <div class="logs-table-row">
                         <div class="row flex-wrap">
-                            <div class="col-12 col-md-1">
+                            <div class="col-12 col-md-2">
                                 <div class="logs-table-cell">
                                     @if (!$feature->is_visible)
                                         <i class="fas fa-eye-slash mr-1"></i>
@@ -82,7 +82,7 @@
                                     {{ $feature->name }}
                                 </div>
                             </div>
-                            <div class="col-6 col-sm-2">
+                            <div class="col-6 col-md-2">
                                 <div class="logs-table-cell">{!! $feature->rarity->displayName !!}</div>
                             </div>
                             <div class="col-6 col-md-2">
@@ -94,10 +94,10 @@
                             <div class="col-6 col-md-2">
                                 <div class="logs-table-cell">{{ $feature->species ? $feature->species->name : '---' }}</div>
                             </div>
-                            <div class="col-6 col-md-2">
+                            <div class="col-6 col-md-1">
                                 <div class="logs-table-cell">{{ $feature->subtype ? $feature->subtype->name : '---' }}</div>
                             </div>
-                            <div class="col-12 col-md-1">
+                            <div class="col-6 col-md-1">
                                 <div class="logs-table-cell"><a href="{{ url('admin/data/traits/edit/' . $feature->id) }}" class="btn btn-primary py-0 px-1 w-100">Edit</a></div>
                             </div>
                         </div>

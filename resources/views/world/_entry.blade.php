@@ -11,8 +11,9 @@
             <x-admin-edit title="{{ $edit['title'] }}" :object="$edit['object']" />
         @endif
         <h3>
-            @if (!($visible ?? true))
+            @if (!($visible ?? false))
                 <i class="fas fa-eye-slash mr-1"></i>
+            @else
             @endif
             {!! $name !!}
             @if (isset($searchUrl) && $searchUrl)

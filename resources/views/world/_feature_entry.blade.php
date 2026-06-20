@@ -40,29 +40,61 @@
             {!! $feature->parsed_description !!}
         </div>
         @if ($feature->altTypes->count())
-            <h5 class="inventory-header">
-                Alternate Types
-                <a class="small collapse-toggle collapsed" href="#alt-{{ $feature->id }}" data-toggle="collapse">Show</a></h3>
-            </h5>
-            <div class="collapse show" id="alt-{{ $feature->id }}">
-                <ul>
-                    @foreach ($feature->altTypes as $altType)
-                        <li>
-                            {!! $altType->displayName !!} <a href="{{ $altType->searchUrl }}" class="world-entry-search text-muted"><i class="fas fa-search"></i></a>
-                            @if (!$altType->display_separately)
-                                @if ($altType->species_id)
-                                    <div><strong>Species:</strong> {!! $altType->species->displayName !!} @if ($altType->subtype_id)
-                                            ({!! $altType->subtype->displayName !!} subtype)
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="inventory-header">
+                        Variations
+                    </h5>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        @foreach ($feature->altTypes as $altType)
+                            <div class="col-md-3">
+
+                                <div class="card h-100">
+
+                                    @if ($altType->has_image)
+                                        <img src="{{ $altType->imageUrl }}"
+                                            class="card-img-top"
+                                            alt="{{ $feature->name }}">
+                                    @endif
+
+                                    <div class="card-body">
+
+                                        <div class="mb-2">
+                                            {!! $altType->displayName !!}
+                                            <a href="{{ $altType->searchUrl }}" class="world-entry-search text-muted">
+                                                <i class="fas fa-search"></i>
+                                            </a>
+                                        </div>
+
+                                        @if (!$altType->display_separately)
+
+                                            @if ($altType->species_id)
+                                                <div class="small mb-2">
+                                                    <strong>Species:</strong>
+                                                    {!! $altType->species->displayName !!}
+                                                    @if ($altType->subtype_id)
+                                                        ({!! $altType->subtype->displayName !!} subtype)
+                                                    @endif
+                                                </div>
+                                            @endif
+
+                                            <div class="world-entry-text parsed-text text-start lh-lg">
+                                                {!! $altType->parsed_description !!}
+                                            </div>
+
                                         @endif
+
                                     </div>
-                                @endif
-                                <div class="world-entry-text parsed-text">
-                                    {!! $altType->parsed_description !!}
+
                                 </div>
-                            @endif
-                        </li>
-                    @endforeach
-                </ul>
+
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         @endif
     </div>

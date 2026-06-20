@@ -189,6 +189,11 @@
                             {!! Form::textarea('alt[description][' . $altType->id . ']', $altType->description, ['class' => 'form-control wysiwyg']) !!}
                         </div>
                         <div class="form-group">
+                            {!! Form::checkbox('alt[is_visible]['.$altType->id.']', 1, $altType->is_visible, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+                            {!! Form::label('alt[is_visible]['.$altType->id.']', 'Is Visible', ['class' => 'form-check-label ml-3']) !!}
+                            {!! add_help('If turned off, this alternate trait will not be visible in trait lists or available for selection.') !!}
+                        </div>
+                        <div class="form-group">
                             {!! Form::checkbox('alt[display_separate][' . $altType->id . ']', 1, $altType->display_separate, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
                             {!! Form::label('alt[display_separate]', 'Display Separately', ['class' => 'form-check-label ml-3']) !!} {!! add_help('If enabled, this trait will be displayed separately from its parent in general trait listings, including species\' visual trait indexes if enabled.') !!}
                         </div>

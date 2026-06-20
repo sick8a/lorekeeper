@@ -347,7 +347,8 @@ class FeatureController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getEditFeature($id) {
-        $feature = Feature::where('id', $id)->whereNull('parent_id')->first();
+        $feature = Feature::find($id);
+
         if (!$feature) {
             abort(404);
         }

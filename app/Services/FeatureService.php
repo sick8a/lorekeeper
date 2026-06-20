@@ -503,9 +503,9 @@ class FeatureService extends Service {
                 foreach ($data['alt']['id'] as $key=>$alt) {
                     // Collect data for the alt type
                     $altData[$key] = [
-                        'id'                  => $alt ? $alt : null,
-                        'parent_id'           => $feature->id,
-                        'feature_category_id' => $data['alt']['feature_category_id'][$key],
+                        'id'                     => $alt ? $alt : null,
+                        'parent_id'              => $feature->id,
+                        'feature_category_id'    => $data['alt']['feature_category_id'][$key],
                         'feature_subcategory_id' => $data['alt']['feature_subcategory_id'][$key] ?? null,
                         'name'                => $data['alt']['name'][$key],
                         'display_mode'        => $data['alt']['display_mode'][$key],

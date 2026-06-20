@@ -11,7 +11,7 @@ class FeatureSubcategory extends Model {
      * @var array
      */
     protected $fillable = [
-        'name', 'sort', 'has_image', 'description', 'parsed_description',
+        'name', 'sort', 'has_image', 'description', 'parsed_description', 'is_visible', 'hash',
     ];
 
     /**
@@ -73,7 +73,7 @@ class FeatureSubcategory extends Model {
      * @return string
      */
     public function getSubcategoryImageFileNameAttribute() {
-        return $this->id.'-image.png';
+        return $this->hash.$this->id.'-image.png';
     }
 
     /**

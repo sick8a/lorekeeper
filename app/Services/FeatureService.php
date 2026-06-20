@@ -348,7 +348,7 @@ class FeatureService extends Service {
             if ((isset($data['feature_category_id']) && $data['feature_category_id']) && !FeatureCategory::where('id', $data['feature_category_id'])->exists()) {
                 throw new \Exception('The selected trait category is invalid.');
             }
-            if ((isset($data['feature_subcategory_id']) && $data['feature_subcategory_id']) && !FeatureCategory::where('id', $data['feature_subcategory_id'])->exists()) {
+            if ((isset($data['feature_subcategory_id']) && $data['feature_subcategory_id']) && !FeatureSubategory::where('id', $data['feature_subcategory_id'])->exists()) {
                 throw new \Exception('The selected trait subcategory is invalid.');
             }
             if ((isset($data['species_id']) && $data['species_id']) && !Species::where('id', $data['species_id'])->exists()) {
@@ -462,7 +462,7 @@ class FeatureService extends Service {
             if ((isset($data['feature_category_id']) && $data['feature_category_id']) && !FeatureCategory::where('id', $data['feature_category_id'])->exists()) {
                 throw new \Exception('The selected trait category is invalid.');
             }
-            if ((isset($data['feature_subcategory_id']) && $data['feature_subcategory_id']) && !FeatureCategory::where('id', $data['feature_subcategory_id'])->exists()) {
+            if ((isset($data['feature_subcategory_id']) && $data['feature_subcategory_id']) && !FeatureSubcategory::where('id', $data['feature_subcategory_id'])->exists()) {
                 throw new \Exception('The selected trait subcategory is invalid.');
             }
             if ((isset($data['species_id']) && $data['species_id']) && !Species::where('id', $data['species_id'])->exists()) {
@@ -506,6 +506,7 @@ class FeatureService extends Service {
                         'id'                  => $alt ? $alt : null,
                         'parent_id'           => $feature->id,
                         'feature_category_id' => $data['alt']['feature_category_id'][$key],
+                        'feature_subcategory_id' => $data['alt']['feature_subcategory_id'][$key] ?? null,
                         'name'                => $data['alt']['name'][$key],
                         'display_mode'        => $data['alt']['display_mode'][$key],
                         'rarity_id'           => $data['alt']['rarity_id'][$key],

@@ -265,7 +265,7 @@ class Feature extends Model {
                     break;
                 case 4:
                     if ($this->parent) {
-                        $name = $this->name . ' (' . $this->parent->name . ')';
+                        $name = $this->name.' ('.$this->parent->name.')';
                     }
                     break;
             }

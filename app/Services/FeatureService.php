@@ -348,7 +348,7 @@ class FeatureService extends Service {
             if ((isset($data['feature_category_id']) && $data['feature_category_id']) && !FeatureCategory::where('id', $data['feature_category_id'])->exists()) {
                 throw new \Exception('The selected trait category is invalid.');
             }
-            if ((isset($data['feature_subcategory_id']) && $data['feature_subcategory_id']) && !FeatureSubategory::where('id', $data['feature_subcategory_id'])->exists()) {
+            if ((isset($data['feature_subcategory_id']) && $data['feature_subcategory_id']) && !FeatureSubcategory::where('id', $data['feature_subcategory_id'])->exists()) {
                 throw new \Exception('The selected trait subcategory is invalid.');
             }
             if ((isset($data['species_id']) && $data['species_id']) && !Species::where('id', $data['species_id'])->exists()) {

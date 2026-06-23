@@ -20,16 +20,16 @@ return [
     */
 
     // Navbar News Notif - Juni
-    'navbar_news_notif' => 0,
+    'navbar_news_notif' => 1,
 
     // Species Trait Index - Mercury
     'species_trait_index' => [
-        'enable'       => 0,
-        'trait_modals' => 0, // Enables modals when you click on a trait for more info instead of linking to the traits page - Moif
+        'enable'       => 1,
+        'trait_modals' => 1, // Enables modals when you click on a trait for more info instead of linking to the traits page - Moif
     ],
 
     // Character Status Badges - Juni
-    'character_status_badges' => 0,
+    'character_status_badges' => 1,
 
     // Character TH Profile Link - Juni
     'character_TH_profile_link' => 0,
@@ -39,7 +39,7 @@ return [
 
     // Item Entry Expansion - Mercury
     'item_entry_expansion' => [
-        'extra_fields'    => 0,
+        'extra_fields'    => 1,
         'resale_function' => 0,
         'loot_tables'     => [
             // Adds the ability to use either rarity criteria for items or item categories with rarity criteria in loot tables. Note that disabling this does not apply retroactively.
@@ -49,10 +49,10 @@ return [
     ],
 
     // Group Traits By Category - Uri
-    'traits_by_category' => 0,
+    'traits_by_category' => 1,
 
     // Scroll To Top - Uri
-    'scroll_to_top' => 0, // 1 - On, 0 - off
+    'scroll_to_top' => 1, // 1 - On, 0 - off
 
     // Character Reward Expansion - Uri
     'character_reward_expansion' => [
@@ -68,20 +68,20 @@ return [
 
     // MYO Image Hide/Remove - Mercury
     // Adds an option when approving MYO submissions to hide or delete the MYO placeholder image
-    'remove_myo_image' => 0,
+    'remove_myo_image' => 1,
 
     // Auto-populate New Image Traits - Mercury
     // Automatically adds the traits present on a character's active image to the list when uploading a new image for an extant character.
-    'autopopulate_image_features' => 0,
+    'autopopulate_image_features' => 1,
 
     // Staff Rewards - Mercury
     'staff_rewards' => [
-        'enabled'     => 0,
+        'enabled'     => 1,
         'currency_id' => 1,
     ],
 
     // Organised Traits Dropdown - Draginraptor
-    'organised_traits_dropdown' => 0,
+    'organised_traits_dropdown' => 1,
 
     // Previous & Next buttons on Character pages - Speedy
     // Adds buttons linking to the previous character as well as the next character on all character pages.

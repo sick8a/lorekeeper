@@ -4,15 +4,15 @@ return [
     // Number between 0-100. Percentage chance to inherit traits from both parents upon generating offspring. Set 100 for always. Set 0 for never.
     'trait_inheritance' => 100,
     // 0: Any character can be paired. 1: Only male/female characters can be paired.
-    'sex_restriction' => 0,
+    'sex_restriction' => 1,
     // 0: Disabled aka characters do not need a set sex. 1: Enabled aka characters must have a set sex
-    'force_sex' => 0,
+    'force_sex' => 1,
     // 0: Disabled, do not roll sex. 1-100: Chance to generate a male offspring. Must total 100 with the pairing_female_percentage setting.
     'offspring_male_percentage' => 0,
     // 0: Disabled, do not roll sex. 1-100: Chance to generate a male offspring. Must total 100 with the pairing_male_percentage setting.
-    'offspring_female_percentage' => 0,
+    'offspring_female_percentage' => 50,
     // 0: Disabled. Number of days to wait between pairing a character.
-    'cooldown' => 0,
+    'cooldown' => 30,
     // 0: rarity is random between rarity options from features, with boosts affecting character rarity
     // 1: rarity is chosen by highest rarity of inherited traits (vanilla) (recommended)
     'rarity_inheritance' => 1,
@@ -24,7 +24,7 @@ return [
     /////////////////////////////////////
 
     // 0: Disabled, 1: Enabled
-    'colours' => 0,
+    'colours' => 1,
 
     // if colours from parents should be inherited, entirely visual, no actual colour checks occur,
     // just a colour palette generated from parents and displayed on the pairing slots
@@ -44,7 +44,7 @@ return [
 
     // 0: characters do not automatically generate image colours on image upload, 1: characters automatically generate image colours on image upload
     // only for non-myos, myos only generate colours if from a pairing
-    'auto_generate_colours' => 1,
+    'auto_generate_colours' => 0,
 
     // 0: no alternative palettes, 1: alternative palettes are generated for pairing myos (minor adjustments to the main palette)
     'alternative_palettes' => 1,

@@ -430,6 +430,8 @@ Route::group(['prefix' => 'character', 'namespace' => 'Characters', 'middleware'
 
     Route::post('{slug}/images/sort', 'CharacterImageController@postSortImages');
 
+    Route::post('image/{id}/colours', 'CharacterImageController@postImageColours');
+
     // CHARACTER
     Route::get('{slug}/stats', 'CharacterController@getEditCharacterStats');
     Route::post('{slug}/stats', 'CharacterController@postEditCharacterStats');
@@ -446,6 +448,10 @@ Route::group(['prefix' => 'character', 'namespace' => 'Characters', 'middleware'
     Route::post('{slug}/settings', 'CharacterController@postCharacterSettings');
 
     Route::post('{slug}/transfer', 'CharacterController@postTransfer');
+
+    # LINEAGE
+    Route::get('{slug}/lineage', 'CharacterLineageController@getEditCharacterLineage');
+    Route::post('{slug}/lineage', 'CharacterLineageController@postEditCharacterLineage');
 });
 // Might rewrite these parts eventually so there's less code duplication...
 Route::group(['prefix' => 'myo', 'namespace' => 'Characters', 'middleware' => 'power:manage_characters'], function () {
@@ -465,6 +471,10 @@ Route::group(['prefix' => 'myo', 'namespace' => 'Characters', 'middleware' => 'p
     Route::post('{id}/settings', 'CharacterController@postMyoSettings');
 
     Route::post('{id}/transfer', 'CharacterController@postMyoTransfer');
+
+    # LINEAGE
+    Route::get('{id}/lineage', 'CharacterLineageController@getEditMyoLineage');
+    Route::post('{id}/lineage', 'CharacterLineageController@postEditMyoLineage');
 });
 
 // RAFFLES
@@ -679,4 +689,10 @@ Route::group(['prefix' => 'mail', 'middleware' => 'power:send_mod_mail'], functi
     Route::get('view/{id}', 'ModMailController@getMail');
     Route::get('create', 'ModMailController@getCreateMail');
     Route::post('create', 'ModMailController@postCreateMail');
+});
+
+// PAIRINGS
+Route::group(['prefix' => 'pairings', 'middleware' => 'power:manage_raffles'], function () {
+    Route::get('roller', 'PairingController@getRoller');
+    Route::post('roller', 'PairingController@postRoll');
 });

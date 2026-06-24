@@ -500,4 +500,33 @@ return [
         'message' => 'It\'s your birthday this month, {user_name}! A gift has been left in your inventory. (<a href="{url}">View Inventory</a>)',
         'url'     => 'inventory',
     ],
+    
+    // PAIRING_APPROVED
+    1300 => [
+        'name'    => 'Pairing Approved',
+        'message' => 'Your pairing of <a href="{character_1_url}">{character_1_slug}</a> and <a href="{character_2_url}">{character_2_slug}</a> has been approved! (<a href="{url}">View Pairings</a>)',
+        'url'     => '/characters/pairings?type=pending',
+    ],
+
+    // PAIRING_REJECTED
+    1301 => [
+        'name'    => 'Pairing Rejected',
+        'message' => 'Your pairing of <a href="{character_1_url}">{character_1_slug}</a> and <a href="{character_2_url}">{character_2_slug}</a> has been rejected. (<a href="{url}">View Pairings</a>)',
+        'url'     => '/characters/pairings?type=closed',
+    ],
+
+    // PAIRING_NEW_APPROVAL
+    1302 => [
+        'name'    => 'Pairing Approval Request',
+        'message' => 'A new pairing of <a href="{character_1_url}">{character_1_slug}</a> and <a href="{character_2_url}">{character_2_slug}</a> is awaiting your approval! (<a href="{url}">View Pairings</a>)',
+        'url'     => '/characters/pairings?type=approval',
+    ],
+
+    // PAIRING_CANCELLED
+    1303 => [
+        'name'    => 'Pairings Cancelled',
+        'message' => 'The pairing of <a href="{character_1_url}">{character_1_slug}</a> and <a href="{character_2_url}">{character_2_slug}</a> has been cancelled.',
+        'url'     => '',
+    ],
+
 ];

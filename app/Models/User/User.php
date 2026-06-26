@@ -1092,43 +1092,42 @@ class User extends Authenticatable implements MustVerifyEmail {
             $createdlike->refresh();
         }
     }
-
+    
     /**
      * Check if user can like the character again.
      *
      * @param mixed $character
      */
     public function canLike($character) {
-        // triplecheck that a like exists even though we spammed this check literally everywhere.
+        // Find existing like or create one.
         $like = $this->characterLikes()->where('character_id', $character->id)->first();
 
         if (!$like) {
-            $createdlike = $this->characterLikes()->create([
-                'user_id'          => $this->id,
-                'character_id'     => $character->id,
+            $like = $this->characterLikes()->create([
+                'user_id'      => $this->id,
+                'character_id' => $character->id,
             ]);
-            $this->refresh();
-            $createdlike->refresh();
         }
 
-        // user disabled likes on their characters
+        // User disabled likes on their characters.
         if (!$character->user->settings->allow_character_likes) {
             return false;
         }
 
-        // already liked
+        // Already liked.
         if ($like->liked_at) {
-            // can only like once
+            // Can only like once.
             if (!Settings::get('character_likes')) {
                 return false;
             }
-            // can like daily
+
+            // Can like daily.
             if ($like->liked_at->isToday()) {
                 return false;
             }
         }
 
-        // else you can :)
+        // Otherwise, the user can like.
         return true;
     }
 }

@@ -476,13 +476,13 @@ function allAttachments($model) {
 
     return $totals;
 }
-    
+
 /**
  * Returns the euclidean distance between two colours.
- * 
+ *
  * @param array $rgb1
  * @param array $rgb2
- * 
+ *
  * @return float
  */
 function colourDistance($rgb1, $rgb2) {

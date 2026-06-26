@@ -500,7 +500,7 @@ return [
         'message' => 'It\'s your birthday this month, {user_name}! A gift has been left in your inventory. (<a href="{url}">View Inventory</a>)',
         'url'     => 'inventory',
     ],
-    
+
     // PAIRING_APPROVED
     1300 => [
         'name'    => 'Pairing Approved',

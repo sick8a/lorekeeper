@@ -11,8 +11,8 @@ use App\Models\Character\CharacterCurrency;
 use App\Models\Character\CharacterDesignUpdate;
 use App\Models\Character\CharacterFeature;
 use App\Models\Character\CharacterImage;
-use App\Models\Character\CharacterTransfer;
 use App\Models\Character\CharacterLineage;
+use App\Models\Character\CharacterTransfer;
 use App\Models\Sales\SalesCharacter;
 use App\Models\Species\Subtype;
 use App\Models\User\User;
@@ -23,10 +23,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
-
-use League\ColorExtractor\Palette;
-use League\ColorExtractor\ColorExtractor;
 use League\ColorExtractor\Color;
+use League\ColorExtractor\ColorExtractor;
+use League\ColorExtractor\Palette;
 
 class CharacterManager extends Service {
     /*
@@ -1074,6 +1073,10 @@ class CharacterManager extends Service {
 
     /**
      * Generates a colour palette based on the image.
+     *
+     * @param mixed      $character_image
+     * @param mixed      $user
+     * @param mixed|null $colours
      */
     public function imageColours($character_image, $user, $colours = null) {
         DB::beginTransaction();
@@ -1095,7 +1098,7 @@ class CharacterManager extends Service {
             $character_image->colours = json_encode($colours);
             $character_image->save();
 
-            $this->createLog($user->id, null, null, null, $character_image->character_id, 'Image Colours ' . ($created ? 'Generated' : 'Updated'), '', 'character');
+            $this->createLog($user->id, null, null, null, $character_image->character_id, 'Image Colours '.($created ? 'Generated' : 'Updated'), '', 'character');
 
             return $this->commitReturn(true);
         } catch (\Exception $e) {
@@ -1971,6 +1974,45 @@ class CharacterManager extends Service {
     }
 
     /**
+     * Updates a character's lineage.
+     *
+     * @param array     $data
+     * @param Character $character
+     * @param User      $user
+     * @param bool      $isAdmin
+     *
+     * @return bool
+     */
+    public function updateCharacterLineage($data, $character, $user, $isAdmin = false) {
+        DB::beginTransaction();
+
+        try {
+            if (!$user->hasPower('manage_characters')) {
+                throw new \Exception('You do not have the required permissions to do this.');
+            }
+
+            if (!$character->lineage) {
+                return $this->handleCharacterLineage($data, $character);
+            } else {
+                $character->lineage->update([
+                    'parent_1_id'   => $data['parent_1_id'] ?? null,
+                    'parent_1_name' => $data['parent_1_id'] ? null : ($data['parent_1_name'] ?? null),
+                    'parent_1_id'   => $data['parent_2_id'] ?? null,
+                    'parent_2_name' => $data['parent_2_id'] ? null : ($data['parent_2_name'] ?? null),
+                    'depth'         => $data['depth'] ?? 0,
+                ]);
+            }
+            // CUSTOM ANCESTRY - TODO
+
+            return $this->commitReturn(true);
+        } catch (\Exception $e) {
+            $this->setError('error', $e->getMessage());
+        }
+
+        return $this->rollbackReturn(false);
+    }
+
+    /**
      * Handles character data.
      *
      * @param array $data
@@ -2052,7 +2094,7 @@ class CharacterManager extends Service {
             }
             $imageData = Arr::only($data, [
                 'species_id', 'subtype_id', 'rarity_id', 'use_cropper',
-                'x0', 'x1', 'y0', 'y1','sex'
+                'x0', 'x1', 'y0', 'y1', 'sex',
             ]);
             $imageData['use_cropper'] = isset($data['use_cropper']);
             $imageData['description'] = $data['image_description'] ?? null;
@@ -2196,53 +2238,16 @@ class CharacterManager extends Service {
     }
 
     /**
-     * Updates a character's lineage.
-     *
-     * @param  array                            $data
-     * @param  \App\Models\Character\Character  $character
-     * @param  \App\Models\User\User            $user
-     * @param  bool                             $isAdmin
-     * @return  bool
-     */
-    public function updateCharacterLineage($data, $character, $user, $isAdmin = false)
-    {
-        DB::beginTransaction();
-
-        try {
-            if(!$user->hasPower('manage_characters')) throw new \Exception('You do not have the required permissions to do this.');
-
-            if (!$character->lineage) {
-                return $this->handleCharacterLineage($data, $character);
-            } else {
-                $character->lineage->update([
-                    'parent_1_id'   => $data['parent_1_id'] ?? null,
-                    'parent_1_name' => $data['parent_1_id'] ? null : ($data['parent_1_name'] ?? null),
-                    'parent_1_id'   => $data['parent_2_id'] ?? null,
-                    'parent_2_name' => $data['parent_2_id'] ? null : ($data['parent_2_name'] ?? null),
-                    'depth'       => $data['depth'] ?? 0,
-                ]);
-            }
-            // CUSTOM ANCESTRY - TODO
-
-            return $this->commitReturn(true);
-        } catch(\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-        return $this->rollbackReturn(false);
-    }
-
-    /**
      * Handles character lineage data.
      *
-     * @param  array                            $data
-     * @return \App\Models\Character\Character  $character
-     * @param  bool                             $isMyo
-     * @return \App\Models\Character\CharacterLineage|bool
+     * @param array $data
+     * @param mixed $character
+     *
+     * @return Character             $character
+     * @return bool|CharacterLineage
      */
-    private function handleCharacterLineage($data, $character)
-    {
+    private function handleCharacterLineage($data, $character) {
         try {
-
             if (!isset($data['parent_1_id']) && !isset($data['parent_1_name']) && !isset($data['parent_2_id']) && !isset($data['parent_2_name'])) {
                 throw new \Exception('No lineage data provided.');
             }
@@ -2271,10 +2276,10 @@ class CharacterManager extends Service {
             ]);
 
             return $this->commitReturn($lineage);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->setError('error', $e->getMessage());
         }
-        return false;
 
+        return false;
     }
 }

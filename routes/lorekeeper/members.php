@@ -137,9 +137,10 @@ Route::group(['prefix' => 'character', 'namespace' => 'Characters'], function ()
 
     Route::get('{slug}/image/colours', function ($slug) {
         if (!config('lorekeeper.character_pairing.colours')) {
-            return "";
+            return '';
         }
-        return \App\Models\Character\Character::where('slug', $slug)->first()?->image->displayColours();
+
+        return App\Models\Character\Character::where('slug', $slug)->first()?->image->displayColours();
     });
 });
 

@@ -1,4 +1,5 @@
 <?php
+
 return [
 
     // FORMAT EXAMPLE.
@@ -47,7 +48,7 @@ return [
 
     // URI
     'character_backgrounds' => [
-        'key' => 'character_backgrounds',
+        'key'      => 'character_backgrounds',
         'wiki_key' => 'Character_Backgrounds',
         'creators' => json_encode([
             'Uri' => 'https://github.com/preimpression/',

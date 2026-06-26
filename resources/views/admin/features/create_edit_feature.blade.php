@@ -8,8 +8,9 @@
     {!! breadcrumbs(['Admin Panel' => 'admin', 'Traits' => 'admin/data/traits', ($feature->id ? 'Edit' : 'Create') . ' Trait' => $feature->id ? 'admin/data/traits/edit/' . $feature->id : 'admin/data/traits/create']) !!}
 
     <h1>{{ $feature->id ? 'Edit' : 'Create' }} Trait
-        @if ($feature->id)
+        @if($feature->id)
             <a href="#" class="btn btn-danger float-right delete-feature-button">Delete Trait</a>
+            <a href="#" class="btn btn-outline-danger float-right delete-mass-button mr-1">Mass Delete Trait</a>
         @endif
     </h1>
 
@@ -305,6 +306,10 @@
             $('.delete-feature-button').on('click', function(e) {
                 e.preventDefault();
                 loadModal("{{ url('admin/data/traits/delete') }}/{{ $feature->id }}", 'Delete Trait');
+            });
+            $('.delete-mass-button').on('click', function(e) {
+                e.preventDefault();
+                loadModal("{{ url('admin/data/traits/delete/mass') }}/{{ $feature->id }}", 'Mass Delete Trait');
             });
             refreshSubtype();
 

@@ -37,7 +37,7 @@ return [
     'colour_distance' => 75,
 
     // colour palettes for checks, myos only get one palette, so this is mostly for when making the pairing to see potential offspring colours
-    'colour_palette_count' => 3,
+    'colour_palette_count' => 5,
 
     // 0: colours are blocks like on image pages, 1: colours are presented as a gradient (this is only for pairings)
     'blend_colours' => 1,

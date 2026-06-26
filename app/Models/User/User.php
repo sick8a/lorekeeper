@@ -1092,7 +1092,7 @@ class User extends Authenticatable implements MustVerifyEmail {
             $createdlike->refresh();
         }
     }
-    
+
     /**
      * Check if user can like the character again.
      *

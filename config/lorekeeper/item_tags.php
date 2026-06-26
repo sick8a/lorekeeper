@@ -48,7 +48,7 @@ return [
         'text_color'       => 'antiquewhite',
         'background_color' => 'slategrey',
     ],
-    
+
     'pairing' => [
         'name'             => 'Pairing',
         'text_color'       => 'antiquewhite',

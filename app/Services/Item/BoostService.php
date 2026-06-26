@@ -5,7 +5,6 @@ namespace App\Services\Item;
 use App\Models\Item\Item;
 use App\Models\Rarity;
 use App\Services\Service;
-use Config;
 use DB;
 
 class BoostService extends Service {
@@ -53,7 +52,7 @@ class BoostService extends Service {
         DB::beginTransaction();
 
         try {
-            //put inputs into an array to transfer to the DB
+            // put inputs into an array to transfer to the DB
             if (isset($data['setting']) && isset($data['rarity_id'])) {
                 throw new \Exception('You can only set either setting or rarity.');
             }
@@ -83,7 +82,7 @@ class BoostService extends Service {
                 $boostData['rarity_chance'] = $data['rarity_chance'];
             }
 
-            //get pairingData array and put it into the 'data' column of the DB for this tag
+            // get pairingData array and put it into the 'data' column of the DB for this tag
             $tag->update(['data' => json_encode($boostData)]);
 
             return $this->commitReturn(true);

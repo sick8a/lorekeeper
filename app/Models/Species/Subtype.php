@@ -11,7 +11,7 @@ class Subtype extends Model {
      * @var array
      */
     protected $fillable = [
-        'species_id', 'name', 'sort', 'has_image', 'description', 'parsed_description', 'is_visible', 'hash',
+        'species_id', 'name', 'sort', 'has_image', 'description', 'parsed_description', 'is_visible', 'inherit_chance', 'hash',
     ];
 
     /**
@@ -22,15 +22,25 @@ class Subtype extends Model {
     protected $table = 'subtypes';
 
     /**
+     * Accessors to append to the model.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'name_with_species',
+    ];
+
+    /**
      * Validation rules for creation.
      *
      * @var array
      */
     public static $createRules = [
-        'species_id'  => 'required',
-        'name'        => 'required|between:3,100',
-        'description' => 'nullable',
-        'image'       => 'mimes:png',
+        'species_id'     => 'required',
+        'name'           => 'required|between:3,100',
+        'description'    => 'nullable',
+        'image'          => 'mimes:png',
+        'inherit_chance' => 'numeric|min:1|max:100',
     ];
 
     /**

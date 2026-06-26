@@ -1,5 +1,4 @@
 <?php
-
 return [
 
     // FORMAT EXAMPLE.
@@ -42,6 +41,16 @@ return [
         'wiki_key' => 'Alternate Site Designs',
         'creators' => json_encode([
             'Cylunny' => 'https://toyhou.se/cylunny',
+        ]),
+        'version' => '1.0.0',
+    ],
+
+    // URI
+    'character_backgrounds' => [
+        'key' => 'character_backgrounds',
+        'wiki_key' => 'Character_Backgrounds',
+        'creators' => json_encode([
+            'Uri' => 'https://github.com/preimpression/',
         ]),
         'version' => '1.0.0',
     ],

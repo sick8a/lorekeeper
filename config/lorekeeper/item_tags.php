@@ -36,4 +36,16 @@ return [
         'text_color'       => '#ffffff',
         'background_color' => '#573f7e',
     ],
+
+    'foreground' => [
+        'name'             => 'Foreground',
+        'text_color'       => 'black',
+        'background_color' => 'lightblue'
+    ],
+	
+    'background' => [
+        'name' => 'Background',
+        'text_color' => 'antiquewhite',
+        'background_color' => 'slategrey'
+    ],
 ];

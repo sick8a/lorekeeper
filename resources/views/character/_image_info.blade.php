@@ -40,61 +40,90 @@
 
             {{-- Basic info --}}
             <div class="tab-pane fade show active" id="info-{{ $image->id }}">
-                <div class="row no-gutters">
-                    <div class="col-lg-4 col-5">
-                        <h5>Species</h5>
+
+
+                <div class="row no-gutters mb-1">
+                    <div class="col-4 col-md-3">
+                        <h5 class="mb-0">Species</h5>
                     </div>
-                    <div class="col-lg-8 col-7 pl-1">{!! $image->species_id ? $image->species->displayName : 'None' !!}</div>
+                    <div class="col-8 col-md-9">
+                        {!! $image->species_id ? $image->species->displayName : 'None' !!}
+                    </div>
                 </div>
+
                 @if ($image->subtype_id)
-                    <div class="row no-gutters">
-                        <div class="col-lg-4 col-5">
-                            <h5>Subtype</h5>
-                        </div>
-                        <div class="col-lg-8 col-7 pl-1">{!! $image->subtype_id ? $image->subtype->displayName : 'None' !!}</div>
+                <div class="row no-gutters mb-1">
+                    <div class="col-4 col-md-3">
+                        <h5 class="mb-0">Subtype</h5>
                     </div>
-                @endif
-                @if ($image->character->homeSetting)
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-4">
-                            <h5>Home</h5>
-                        </div>
-                        <div class="col-lg-8 col-md-6 col-8">{!! $image->character->location ? $image->character->location : 'None' !!}</div>
+                    <div class="col-8 col-md-9">
+                        {!! $image->subtype->displayName !!}
                     </div>
-                @endif
-                @if ($image->character->factionSetting)
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-4">
-                            <h5>Faction</h5>
-                        </div>
-                        <div class="col-lg-8 col-md-6 col-8">{!! $image->character->faction ? $image->character->currentFaction : 'None' !!}{!! $character->factionRank ? ' (' . $character->factionRank->name . ')' : null !!}</div>
-                    </div>
-                @endif
-                <div class="row no-gutters">
-                    <div class="col-lg-4 col-5">
-                        <h5>Rarity</h5>
-                    </div>
-                    <div class="col-lg-8 col-7 pl-1">{!! $image->rarity_id ? $image->rarity->displayName : 'None' !!}</div>
                 </div>
-                @if ($image->sex)
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-4">
-                            <h5>Sex</h5>
-                        </div>
-                        <div class="col-lg-8 col-md-6 col-8">{!! $image->sex !!}</div>
-                    </div>
                 @endif
+
+                @if ($image->character->homeSetting)
+                <div class="row no-gutters mb-1">
+                    <div class="col-4 col-md-3">
+                        <h5 class="mb-0">Home</h5>
+                    </div>
+                    <div class="col-8 col-md-9">
+                        {!! $image->character->location ?: 'None' !!}
+                    </div>
+                </div>
+                @endif
+
+                @if ($image->character->factionSetting)
+                <div class="row no-gutters mb-1">
+                    <div class="col-4 col-md-3">
+                        <h5 class="mb-0">Faction</h5>
+                    </div>
+                    <div class="col-8 col-md-9">
+                        {!! $image->character->currentFaction ?: 'None' !!}
+                        {!! $character->factionRank ? ' (' . $character->factionRank->name . ')' : '' !!}
+                    </div>
+                </div>
+                @endif
+
+                <div class="row no-gutters mb-1">
+                    <div class="col-4 col-md-3">
+                        <h5 class="mb-0">Rarity</h5>
+                    </div>
+                    <div class="col-8 col-md-9">
+                        {!! $image->rarity_id ? $image->rarity->displayName : 'None' !!}
+                    </div>
+                </div>
+
+                @if ($image->sex)
+                <div class="row no-gutters mb-1">
+                    <div class="col-4 col-md-3">
+                        <h5 class="mb-0">Sex</h5>
+                    </div>
+                    <div class="col-8 col-md-9">
+                        {!! $image->sex !!}
+                    </div>
+                </div>
+                @endif
+
+                <div class="row no-gutters mb-1">
+                    <div class="col-4 col-md-3">
+                        <h5 class="mb-0">Coat</h5>
+                    </div>
+                    <div class="col-8 col-md-9">
+                        {!! $character->phenotype ?: 'N/A' !!}
+                    </div>
+                </div>
                 @if (config('lorekeeper.character_pairing.colours'))
                     <div class="row">
-                        <div class="col-lg-4 col-md-6 col-4">
+                        <div class="col-4 col-md-3">
                             <h5>
-                                Colours
+                                Colors
                                 @if ($image->character->is_myo_slot)
-                                    {!! add_help('These colours are created from the parents of the MYO slot. They are not editable until the MYO is created.') !!}
+                                    {!! add_help('These colors are created from the parents of the MYO slot. They are not editable until the MYO is created.') !!}
                                 @endif
                             </h5>
                         </div>
-                        <div class="col-lg-8 col-md-6 col-8">
+                        <div class="col-8 col-md-9">
                             @if ($image->colours)
                                 <div class="{{ $image->character->is_myo_slot ? '' : 'row' }}">
                                     {!! $image->displayColours() !!}
@@ -120,7 +149,6 @@
                         </div>
                     </div>
                 @endif
-
                 <div class="mb-3">
                     <div>
                         <h5>Traits</h5>
@@ -175,16 +203,19 @@
                         </div>
                     @endif
                 </div>
-                <div>
+
+                <!-- <div>
                     <strong>Uploaded:</strong> {!! pretty_date($image->created_at) !!}
                 </div>
                 <div>
                     <strong>Last Edited:</strong> {!! pretty_date($image->updated_at) !!}
-                </div>
+                </div> -->
 
                 @if (Auth::check() && Auth::user()->hasPower('manage_characters'))
-                    <div class="mt-3">
-                        <a href="#" class="btn btn-outline-info btn-sm edit-features" data-id="{{ $image->id }}"><i class="fas fa-cog"></i> Edit Traits</a>
+                    <div class="mt-3 text-right">
+                        <a href="#" class="btn btn-outline-info btn-sm edit-features" data-id="{{ $image->id }}">
+                            <i class="fas fa-cog"></i> Edit Traits
+                        </a>
                     </div>
                 @endif
             </div>

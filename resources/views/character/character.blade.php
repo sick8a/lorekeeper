@@ -102,6 +102,9 @@
                                     {!! Form::checkbox('is_visible', 1, $character->is_visible, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
                                     {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label ml-3']) !!}
                                 </div>
+                                <div class="text-right">
+                                    {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+                                </div>
                             {!! Form::close() !!}
                         </div>
                     @endif

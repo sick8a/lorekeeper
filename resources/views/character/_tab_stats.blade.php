@@ -12,6 +12,7 @@
         <div class="col-lg-9 col-7">{!! $character->category->displayName !!}</div>
     </div>
 @endif
+
 <div class="row no-gutters">
     <div class="col-lg-3 col-5">
         <h5 class="mb-0">Created</h5>

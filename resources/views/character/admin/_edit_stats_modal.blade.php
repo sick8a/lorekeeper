@@ -23,6 +23,10 @@
         {!! Form::label('Character Code') !!} {!! add_help('This code identifies the character itself. This must be unique among all characters (as it\'s used to generate the character\'s page URL).') !!}
         {!! Form::text('slug', $character->slug, ['class' => 'form-control', 'id' => 'code']) !!}
     </div>
+    <div class="form-group">
+        {!! Form::label('Phenotype') !!}
+        {!! Form::text('phenotype', $character->phenotype, ['class' => 'form-control']) !!}
+    </div>
 @endif
 
 <div class="alert alert-info">

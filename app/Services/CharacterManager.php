@@ -1165,7 +1165,7 @@ class CharacterManager extends Service {
 
             $characterData = Arr::only($data, [
                 'character_category_id',
-                'number', 'slug',
+                'number', 'slug', 'phenotype',
             ]);
             $characterData['is_sellable'] = isset($data['is_sellable']);
             $characterData['is_tradeable'] = isset($data['is_tradeable']);
@@ -1227,6 +1227,11 @@ class CharacterManager extends Service {
                 $result[] = 'transfer cooldown';
                 $old['transferrable_at'] = $character->transferrable_at;
                 $new['transferrable_at'] = $characterData['transferrable_at'];
+            }
+            if ($characterData['phenotype'] != $character->phenotype) {
+                $result[] = 'phenotype';
+                $old['phenotype'] = $character->phenotype;
+                $new['phenotype'] = $characterData['phenotype'];
             }
 
             if (count($result)) {
@@ -2034,7 +2039,7 @@ class CharacterManager extends Service {
             $characterData = Arr::only($data, [
                 'character_category_id', 'rarity_id', 'user_id',
                 'number', 'slug', 'description',
-                'sale_value', 'transferrable_at', 'is_visible',
+                'sale_value', 'transferrable_at', 'is_visible', 'phenotype',
             ]);
 
             $characterData['name'] = ($isMyo && isset($data['name'])) ? $data['name'] : null;

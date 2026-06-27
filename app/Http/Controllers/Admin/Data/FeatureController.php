@@ -410,12 +410,13 @@ class FeatureController extends Controller {
     /**
      * Gets the feature deletion modal.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getMassDeleteFeature($id)
-    {
+    public function getMassDeleteFeature($id) {
         $feature = Feature::find($id);
+
         return view('admin.features._delete_mass_feature', [
             'feature' => $feature,
         ]);
@@ -424,25 +425,26 @@ class FeatureController extends Controller {
     /**
      * Deletes a feature.
      *
-     * @param  \Illuminate\Http\Request     $request
-     * @param  App\Services\FeatureService  $service
-     * @param  int                          $id
+     * @param App\Services\FeatureService $service
+     * @param int                         $id
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postMassDeleteFeature(Request $request, FeatureService $service, $id)
-    {
+    public function postMassDeleteFeature(Request $request, FeatureService $service, $id) {
         $data = $request->input('im_sure');
-        if(!isset($data) || $data == 0)
-        {
+        if (!isset($data) || $data == 0) {
             flash('Confirmation check not selected. Please double check which delete button you meant to use.')->error();
+
             return redirect()->back();
         }
-        if($id && $service->deleteMassFeature(Feature::find($id), $data)) {
+        if ($id && $service->deleteMassFeature(Feature::find($id), $data)) {
             flash('Trait deleted successfully.')->success();
+        } else {
+            foreach ($service->errors()->getMessages()['error'] as $error) {
+                flash($error)->error();
+            }
         }
-        else {
-            foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
-        }
+
         return redirect()->to('admin/data/traits');
     }
 

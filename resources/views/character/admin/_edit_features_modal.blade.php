@@ -19,10 +19,6 @@
     {!! Form::select('sex', [null => 'Select Sex', 'Male' => 'Male', 'Female' => 'Female'], $image->sex, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-    {!! Form::label('Phenotype') !!} 
-    {!! Form::text('phenotype', $image->character->phenotype, ['class' => 'form-control']) !!}
-</div>
-<div class="form-group">
     {!! Form::label('Traits') !!}
     <div><a href="#" class="btn btn-primary mb-2" id="add-feature">Add Trait</a></div>
     <div id="featureList">

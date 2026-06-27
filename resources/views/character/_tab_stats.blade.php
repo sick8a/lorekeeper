@@ -4,12 +4,6 @@
     </div>
     <div class="col-lg-9 col-7">{!! $character->displayOwner !!}</div>
 </div>
-<div class="row no-gutters">
-    <div class="row">
-        <div class="col-lg-3 col-4"><h5 class="mb-0">Phenotype</h5></div>
-        <div class="col-lg-9 col-8">{!! $character->phenotype ? $character->phenotype : 'N/A' !!}</div>
-    </div>
-</div>
 @if (!$character->is_myo_slot)
     <div class="row no-gutters">
         <div class="col-lg-3 col-5">

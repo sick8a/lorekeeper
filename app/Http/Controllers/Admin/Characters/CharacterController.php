@@ -108,7 +108,7 @@ class CharacterController extends Controller {
             'artist_id', 'artist_url',
             'species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data',
             'image', 'thumbnail', 'image_description',
-            'sex', 'parent_1_id', 'parent_2_id',
+            'sex', 'parent_1_id', 'parent_2_id', 'phenotype',
         ]);
         if ($character = $service->createCharacter($data, Auth::user())) {
             flash('Character created successfully.')->success();

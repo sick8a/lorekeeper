@@ -762,9 +762,9 @@ class Character extends Model {
         if (!$this->image->sex) {
             return 'Parent';
         } elseif ($this->image->sex == 'Male') {
-            return 'Father';
+            return 'Sire';
         } else {
-            return 'Mother';
+            return 'Dam';
         }
     }
 }

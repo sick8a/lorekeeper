@@ -115,6 +115,7 @@ main > .row {
     /*background-color: #eee;*/
     background-repeat: repeat;
     min-height: 200px;
+    text-align: center;
 }
 
 .navbar .navbar-brand, .navbar .nav-item {
@@ -211,6 +212,11 @@ main > .row {
     .site-header-image {
         display: none;
     }
+
+    .site-header-image #logo {
+        display: none;
+    }
+
     .site-mobile-header {
         display: block;
         position: fixed;
@@ -850,4 +856,12 @@ tr.accountbound {
     align-items: center;
     justify-content: center;
     aspect-ratio: 1;
+}
+
+/* Logo *************************************************************************************/
+
+#logo {
+    max-height: 200px;
+    margin: 1%;
+    max-width: 90%;
 }

@@ -13,18 +13,12 @@
                 <a href="{{ url('reports/new?url=') . $user->url }}"><i class="fas fa-exclamation-triangle fa-xs" data-toggle="tooltip" title="Click here to report this user." style="opacity: 50%; font-size:0.5em;"></i></a>
             </div>
         </h1>
-        <div class="row no-gutters justify-content-center mb-5" style="background-color: rgba(255, 255, 255, .60); padding: 5px; border-radius: 10px;">
+        <div class="row no-gutters justify-content-center" style="background-color: rgba(255, 255, 255, .40); padding: 5px; border-radius: 10px;">
             <div class="col-md-1 text-center">
-                <i class="fas fa-users"></i> {!! $user->rank->displayName !!}{!! add_help($user->rank->parsed_description) !!}
+                <i class="fas fa-users"></i> {!! $user->rank->displayName !!} {!! $user->rank->parsed_description ? add_help($user->rank->parsed_description) : '' !!}
             </div>
             <div class="col-md-2 text-center">
                 <i class="fas fa-link"></i>&nbsp;&nbsp;{!! $user->displayAlias !!}
-            </div>
-            <div class="row no-gutters col-sm-5">
-                <div class="col-lg-3 col-md-3 col-4">
-                    <h5>Rank</h5>
-                </div>
-                <div class="col-lg-9 col-md-9 col-8">{!! $user->rank->displayName !!} {!! $user->rank->parsed_description ? add_help($user->rank->parsed_description) : '' !!}</div>
             </div>
             <div class="col-md-2 text-center">
                 <i class="fas fa-calendar-alt"></i>&nbsp;&nbsp;{!! format_date($user->created_at, false) !!}

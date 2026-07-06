@@ -440,8 +440,8 @@ class UserService extends Service {
     /**
      * Updates the user's profile image.
      *
-     * @param \App\Models\User\User $user
-     * @param mixed                 $profile_img
+     * @param User  $user
+     * @param mixed $profile_img
      *
      * @return bool
      */
@@ -458,7 +458,7 @@ class UserService extends Service {
 
             if ($user->profile_img != 'default.png') {
                 $file = $directory.$user->profile_img;
-                //$destinationPath = 'uploads/' . $id . '/';
+                // $destinationPath = 'uploads/' . $id . '/';
 
                 if (File::exists($file)) {
                     if (!unlink($file)) {

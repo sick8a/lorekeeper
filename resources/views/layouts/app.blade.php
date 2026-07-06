@@ -156,7 +156,12 @@
     <div id="app">
 
         <div class="site-header-image" id="header" style="background-image: url('{{ $decoratorTheme?->headerImageUrl ?? $conditionalTheme?->headerImageUrl ?? $theme?->headerImageUrl ?? asset('images/header.png') }}');">
-            <img id="logo" src="{{ asset('images/logo.png') }}">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <img id="logo" src="{{ asset('images/logo.png') }}" style="display: block; margin-top: 10px;">
+                <a class="navbar-brand" href="{{ url('/') }}" style="display: block; text-align: center;">
+                    <h3>{{ config('lorekeeper.settings.site_name', 'Lorekeeper') }}</h3>
+                </a>
+            </div>
         </div>
         @include('layouts._nav')
         @if (View::hasSection('sidebar'))

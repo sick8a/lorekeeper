@@ -36,7 +36,7 @@ return [
     | site wherever the name needs to be displayed.
     |
     */
-    'site_name'                                         => 'Arrows of Sagittarius',
+    'site_name'                                         => 'Arrows of the Painted Skies',
 
     /*
     |--------------------------------------------------------------------------
@@ -48,7 +48,7 @@ return [
     | It is not, however, displayed on the site itself. This should be kept short and snappy!
     |
     */
-    'site_desc'                                         => 'A Centaur HARPG',
+    'site_desc'                                         => 'A prehistoric fantasy HARPG',
 
     /*
     |--------------------------------------------------------------------------

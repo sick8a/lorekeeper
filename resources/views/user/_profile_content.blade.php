@@ -61,7 +61,7 @@
     </div>
 @endif
 
-<div class="card-deck mb-4 profile-assets" style="clear:both;">
+<!--<div class="card-deck mb-4 profile-assets" style="clear:both;">
     <div class="card profile-currencies profile-assets-card">
         <div class="card-body text-center">
             <h5 class="card-title">Bank</h5>
@@ -202,7 +202,7 @@
         </div>
     </div>
 </div>
-
+-->
 @if ($deactivated)
     </div>
 @endif

@@ -1,9 +1,5 @@
-<h1>Welcome Back, {!! Auth::user()->displayName !!}.</h1>
-<div class="card mb-4 timestamp">
-    <div class="card-body">
-        <i class="far fa-clock"></i> {!! format_date(Carbon\Carbon::now()) !!}
-    </div>
-</div>
+<h1>Heyito Abaya, {!! Auth::user()->displayName !!}.</h1>
+
 <div class="row">
     <div class="col-md-12">
         @include('widgets._carousel')

@@ -865,3 +865,24 @@ tr.accountbound {
     margin: 1%;
     max-width: 90%;
 }
+
+/* Dash Stuff *************************************************************************************/
+
+.no-caret::after {
+    display: none !important;
+}
+
+.user-menu {
+    min-width: auto !important;
+    width: max-content;
+    padding: 0;
+}
+
+.user-menu .list-group-item {
+    padding: 6px 12px;
+    white-space: nowrap;
+}
+
+.user-menu a {
+    display: block;
+}

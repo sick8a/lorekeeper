@@ -12,8 +12,14 @@
         <li class="nav-item"><a href="{{ url('feeds/sales') }}" class="nav-link"><i class="fas fa-rss-square"></i> Sales</a></li>
     </ul>
 </nav>
-<div class="copyright">&copy; {{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} v{{ config('lorekeeper.settings.version') }} {{ Carbon\Carbon::now()->year }}</div>
-
+<div class="copyright">
+    <div style="display:inline-flex; flex-direction:column;">
+        <span><span style="text-transform: lowercase;">v</span>{{ config('lorekeeper.settings.version') }}</span>
+        <span>
+            &copy; {{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} {{ Carbon\Carbon::now()->year }}
+        </span>
+    </div>
+</div>
 @if (config('lorekeeper.extensions.scroll_to_top'))
     @include('widgets/_scroll_to_top')
 @endif

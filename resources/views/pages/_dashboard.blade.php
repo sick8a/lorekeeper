@@ -10,8 +10,8 @@
                          alt="{{ Auth::user()->name }}">
 
                     <div style="display:flex; flex-direction:column; justify-content:center;">
-                        <h3 style="margin:0;">Heyito Abaya,</h3>
-                        <h2 style="margin:0;">{!! Auth::user()->displayName !!}!</h2>
+                        <h4 style="margin:0;">Heyito Abaya,</h4>
+                        <h2 style="margin:0;">{!! Auth::user()->name !!}!</h2>
                     </div>
                 </div>
 
